@@ -17,17 +17,18 @@ import java.util.List;
 public class TestRunner {
     private final OutputService outputService = new ConsoleOutputService();
 
-    public void run(String className) throws ClassNotFoundException,
+    public void run(String className) throws
+            ClassNotFoundException,
             NoSuchMethodException,
             InvocationTargetException,
             InstantiationException,
             IllegalAccessException {
+
         int testFailedCount = 0;
         Object object;
 
         Class<?> clazz = Class.forName(className);
         Constructor<?> constructor = clazz.getConstructor();
-
 
         List<Method> beforeAnnotationMethods = getMethodsByAnnotation(clazz, Before.class);
         List<Method> testAnnotationMethods = getMethodsByAnnotation(clazz, Test.class);
