@@ -30,9 +30,10 @@ public class TestRunner {
         Class<?> clazz = Class.forName(className);
         Constructor<?> constructor = clazz.getConstructor();
 
-        List<Method> beforeAnnotationMethods = getMethodsByAnnotation(clazz, Before.class);
-        List<Method> testAnnotationMethods = getMethodsByAnnotation(clazz, Test.class);
-        List<Method> afterAnnotationMethods = getMethodsByAnnotation(clazz, After.class);
+        Method[] allMethods = clazz.getDeclaredMethods();
+        List<Method> beforeAnnotationMethods = getMethodsByAnnotation(Before.class, allMethods);
+        List<Method> testAnnotationMethods = getMethodsByAnnotation(Test.class, allMethods);
+        List<Method> afterAnnotationMethods = getMethodsByAnnotation(After.class, allMethods);
 
         for (Method method : testAnnotationMethods) {
             object = constructor.newInstance();
@@ -54,9 +55,8 @@ public class TestRunner {
         }
     }
 
-    private List<Method> getMethodsByAnnotation (Class<?> clazz, Class<? extends Annotation> annotation) {
+    private List<Method> getMethodsByAnnotation (Class<? extends Annotation> annotation, Method[] allMethods) {
         List<Method> list = new ArrayList<>();
-        Method[] allMethods = clazz.getDeclaredMethods();
         for (Method allMethod : allMethods) {
             if (allMethod.isAnnotationPresent(annotation)) {
                 list.add(allMethod);
