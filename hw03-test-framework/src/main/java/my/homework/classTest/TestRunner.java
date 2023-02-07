@@ -4,8 +4,7 @@ import my.homework.annotations.After;
 import my.homework.annotations.Before;
 import my.homework.annotations.Test;
 import my.homework.service.ConsoleOutputService;
-import my.homework.service.OutputService;
-
+import service.OutputService;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -46,7 +45,9 @@ public class TestRunner {
                 callMethods(afterAnnotationMethods, object);
             }
         }
-        outputService.outputReport(testAnnotationMethods.size(), testFailedCount);
+        outputService.outputMessage("TOTAL NUMBER OF TESTS: " + testAnnotationMethods.size());
+        outputService.outputMessage("PASSED TESTS: " + (testAnnotationMethods.size() - testFailedCount));
+        outputService.outputMessage("FAILED TESTS: " + testFailedCount);
     }
 
     private void callMethods(List<Method> methods, Object object) throws InvocationTargetException, IllegalAccessException {

@@ -4,7 +4,7 @@ import my.homework.annotations.After;
 import my.homework.annotations.Before;
 import my.homework.annotations.Test;
 import my.homework.service.ConsoleOutputService;
-import my.homework.service.OutputService;
+import service.OutputService;
 
 public class TestFramework {
     OutputService outputService = new ConsoleOutputService();
