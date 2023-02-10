@@ -1,0 +1,16 @@
+До изменения:
+
+Xmx256m - OutOfMemoryError: Java heap space
+Xmx512m - 46 sec
+Xmx1024m - 42 sec - оптимальный размер хипа до модификации
+Xmx2048m - 57 sec
+Xmx4096m - The system is out of physical RAM or swap space
+
+После изменений:
+
+Xmx256m - 2,086 sec
+Xmx512m - 2,020 sec
+Xmx1024m - 1,999 sec - оптимальный размер хипа после модификации
+Xmx2048m - 2,005 sec
+Xmx4096m - 2,047 sec
+Xmx8192m - 2,002 sec
