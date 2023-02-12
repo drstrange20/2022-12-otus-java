@@ -1,4 +1,4 @@
-package my.homework.api.services;
+package my.homework.api.service;
 
 public interface TestLoggingInterface {
     void calculation(int param1);
