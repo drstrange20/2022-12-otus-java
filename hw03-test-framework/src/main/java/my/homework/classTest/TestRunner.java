@@ -9,9 +9,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestRunner {
     private final OutputService outputService = new ConsoleOutputService();
@@ -57,12 +58,8 @@ public class TestRunner {
     }
 
     private List<Method> getMethodsByAnnotation (Class<? extends Annotation> annotation, Method[] allMethods) {
-        List<Method> list = new ArrayList<>();
-        for (Method allMethod : allMethods) {
-            if (allMethod.isAnnotationPresent(annotation)) {
-                list.add(allMethod);
-            }
-        }
-        return list;
+        return Arrays.stream(allMethods)
+               .filter(method -> method.isAnnotationPresent(annotation))
+               .collect(Collectors.toList());
     }
 }
