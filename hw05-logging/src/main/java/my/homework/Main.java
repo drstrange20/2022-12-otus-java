@@ -23,14 +23,10 @@ public void calculation(int param1, int param2, String param3)
 
 */
 
-import my.homework.service.TestLogging;
+import my.homework.LoggingFramework.LoggingFramework;
 
 public class Main {
-    public static void main(String[] args) {
-        TestLogging testLogging = new TestLogging();
-
-        new TestLogging().calculation(5);
-        new TestLogging().calculation(5, 5);
-        new TestLogging().calculation(5, 5, "5");
+    public static void main(String[] args) throws Exception {
+        new LoggingFramework().run("my.homework.service.TestLogging");
     }
 }

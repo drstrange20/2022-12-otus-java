@@ -1,7 +1,7 @@
 package my.homework.service;
 
 import my.homework.annotation.Log;
-import my.homework.api.services.TestLoggingInterface;
+import my.homework.api.service.TestLoggingInterface;
 
 public class TestLogging implements TestLoggingInterface {
     @Log
