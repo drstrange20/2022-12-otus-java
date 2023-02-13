@@ -27,6 +27,6 @@ import my.homework.LoggingFramework.LoggingFramework;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        new LoggingFramework().run("my.homework.service.TestLogging");
+        new LoggingFramework().run("my.homework.service.Demo");
     }
 }
