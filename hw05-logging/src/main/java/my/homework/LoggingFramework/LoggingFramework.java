@@ -16,14 +16,11 @@ public class LoggingFramework {
 
     public void run(String className) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Class<?> clazz = Class.forName(className);
-        Constructor constructor = clazz.getConstructor();
-        Method[] allMethods = clazz.getDeclaredMethods();
-        List<Method> listOfMethodsWithLogging = getMethodsByAnnotation(allMethods);
+        Constructor<?> constructor = clazz.getConstructor();
+        Method[] method = clazz.getDeclaredMethods();
 
         Object object = constructor.newInstance();
-        for (Method method : listOfMethodsWithLogging) {
-            method.invoke(object);
-        }
+            method[0].invoke(object);
     }
 
     private List<Method> getMethodsByAnnotation(Method[] allMethods) {

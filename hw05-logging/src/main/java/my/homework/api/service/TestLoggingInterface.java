@@ -1,7 +1,7 @@
 package my.homework.api.service;
 
 public interface TestLoggingInterface {
-    void calculation(int param1);
-    void calculation(int param1, int param2);
-    void calculation(int param1, int param2, String param3);
+    void calculation1(int param1);
+    void calculation2(int param1, int param2);
+    void calculation3(int param1, int param2, String param3);
 }
