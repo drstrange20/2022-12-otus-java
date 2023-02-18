@@ -23,10 +23,15 @@ public void calculation(int param1, int param2, String param3)
 
 */
 
-import my.homework.LoggingFramework.LoggingFramework;
+import my.homework.api.service.TestLoggingInterface;
+import my.homework.service.Ioc;
 
-public class Main {
-    public static void main(String[] args) throws Exception {
-        new LoggingFramework().run("my.homework.service.Demo");
+public class Demo {
+    public static void main(String[] args) {
+        TestLoggingInterface myClass = Ioc.createMyClass();
+        myClass.calculation(1);
+        myClass.calculation(1, 2);
+        myClass.calculation(1, 2, "3");
+
     }
 }

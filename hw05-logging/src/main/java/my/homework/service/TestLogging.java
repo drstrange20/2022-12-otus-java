@@ -6,7 +6,6 @@ import service.OutputService;
 
 public class TestLogging implements TestLoggingInterface {
     OutputService outputService = new ConsoleOutputService();
-    @Log
     @Override
     public void calculation(int param1) {
         outputService.outputMessage("calculation with param1 called");
@@ -17,6 +16,7 @@ public class TestLogging implements TestLoggingInterface {
         outputService.outputMessage("calculation with param1, param2 called");
     }
 
+    @Log
     @Override
     public void calculation(int param1, int param2, String param3) {
         outputService.outputMessage("calculation with param1, param2, param3 called");
