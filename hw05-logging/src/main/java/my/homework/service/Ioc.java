@@ -1,16 +1,21 @@
 package my.homework.service;
 
+
 import my.homework.annotation.Log;
 import my.homework.api.service.TestLoggingInterface;
 import service.OutputService;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class Ioc {
+    private static final List<Method> METHODS = Arrays
+            .stream(TestLogging.class.getDeclaredMethods())
+            .filter(method -> method.isAnnotationPresent(Log.class)).toList();
+
     public static TestLoggingInterface createMyClass() {
         InvocationHandler handler = new DemoInvocationHandler(new TestLogging());
 
@@ -20,42 +25,20 @@ public class Ioc {
 
     static class DemoInvocationHandler implements InvocationHandler {
         private final TestLoggingInterface myClass;
-        private final Method[] methods;
         private final OutputService outputService = new ConsoleOutputService();
 
         DemoInvocationHandler(TestLoggingInterface myClass) {
             this.myClass = myClass;
-            this.methods = TestLogging.class.getDeclaredMethods();
         }
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            List<Method> methodList = Arrays.stream(methods)
-                    .filter(method1 -> method1.isAnnotationPresent(Log.class))
-                    .toList();
-//            if ((methodList.get(0).getName().equals(method.getName())) && (Arrays.equals(methodList.get(0).getParameters(), method.getParameters()))) {
-//                outputService.outputMessage(methodList.get(0).getName());
-//            }
-            if (Arrays.equals(method.getParameters(), methodList.get(0).getParameters())) {
-                outputService.outputMessage("1");
-            }
-/*
-            if (method.isAnnotationPresent(Log.class)) {
-                outputService.outputMessage("executed method: " + method.getName() + ", params: ");
-                for (Object o : args) {
-                    System.out.print(o.toString() + " ");
-                    System.out.println();
+            for (Method method1 : METHODS) {
+                if (Arrays.equals(method1.getGenericParameterTypes(), method.getGenericParameterTypes()) && method1.getName().equals(method.getName())) {
+                    outputService.outputMessage("executed method: " + method.getName() + ", params: " + Arrays.toString(args));
                 }
             }
-*/
             return method.invoke(myClass, args);
-        }
-
-        @Override
-        public String toString() {
-            return "DemoInvocationHandler{" +
-                    "myClass=" + myClass +
-                    '}';
         }
     }
 }
