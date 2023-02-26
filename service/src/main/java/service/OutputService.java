@@ -7,4 +7,5 @@ public interface OutputService {
     default void outputMessage(String message) {
         out.println(message);
     }
+
 }
