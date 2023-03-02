@@ -5,6 +5,8 @@ import my.homework.annotations.Before;
 import my.homework.annotations.Test;
 import my.homework.service.ConsoleOutputService;
 import service.OutputService;
+import service.ReportService;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -15,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestRunner {
-    private final OutputService outputService = new ConsoleOutputService();
+    private final ReportService outputService = new ConsoleOutputService();
 
     public void run(String className) throws
             ClassNotFoundException,
@@ -46,9 +48,7 @@ public class TestRunner {
                 callMethods(afterAnnotationMethods, object);
             }
         }
-        outputService.outputMessage("TOTAL NUMBER OF TESTS: " + testAnnotationMethods.size());
-        outputService.outputMessage("PASSED TESTS: " + (testAnnotationMethods.size() - testFailedCount));
-        outputService.outputMessage("FAILED TESTS: " + testFailedCount);
+        outputService.printReport(String.valueOf(testAnnotationMethods.size()), String.valueOf(testFailedCount));
     }
 
     private void callMethods(List<Method> methods, Object object) throws InvocationTargetException, IllegalAccessException {
