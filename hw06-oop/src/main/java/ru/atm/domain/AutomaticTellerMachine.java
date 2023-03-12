@@ -1,6 +1,6 @@
 package ru.atm.domain;
 
-import ru.atm.services.DepositBox;
+import ru.atm.services.DepositBoxImpl;
 import ru.atm.services.cells.*;
 
 public class AutomaticTellerMachine {
@@ -11,7 +11,7 @@ public class AutomaticTellerMachine {
     private final CellForTwoHundredBanknotes cellForTwoHundredBanknotes;
     private final CellForOneHundredBanknotes cellForOneHundredBanknotes;
     private final CellForFiftyBanknotes cellForFiftyBanknotes;
-    private final DepositBox depositBox;
+    private final DepositBoxImpl depositBoxImpl;
 
     public AutomaticTellerMachine(CellForFiveThousandBanknotes cellForFiveThousandBanknotes,
                                   CellForTwoThousandBanknotes cellForTwoThousandBanknotes,
@@ -20,7 +20,7 @@ public class AutomaticTellerMachine {
                                   CellForTwoHundredBanknotes cellForTwoHundredBanknotes,
                                   CellForOneHundredBanknotes cellForOneHundredBanknotes,
                                   CellForFiftyBanknotes cellForFiftyBanknotes,
-                                  DepositBox depositBox) {
+                                  DepositBoxImpl depositBoxImpl) {
         this.cellForFiveThousandBanknotes = cellForFiveThousandBanknotes;
         this.cellForTwoThousandBanknotes = cellForTwoThousandBanknotes;
         this.cellForOneThousandBanknotes = cellForOneThousandBanknotes;
@@ -28,6 +28,6 @@ public class AutomaticTellerMachine {
         this.cellForTwoHundredBanknotes = cellForTwoHundredBanknotes;
         this.cellForOneHundredBanknotes = cellForOneHundredBanknotes;
         this.cellForFiftyBanknotes = cellForFiftyBanknotes;
-        this.depositBox = depositBox;
+        this.depositBoxImpl = depositBoxImpl;
     }
 }

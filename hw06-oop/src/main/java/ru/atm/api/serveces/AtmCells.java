@@ -1,13 +1,9 @@
 package ru.atm.api.serveces;
 
 public abstract class AtmCells {
-    private int banknotesValue;
-    private final int maxAmountOfBanknotesInCell = 2500;
-    private int actualAmountOfBanknotes;
-    private int totalSumInCell;
-
-    public int getTotalSumInCell() {
-        return actualAmountOfBanknotes * banknotesValue;
+    protected int actualAmountOfBanknotes;
+    private int getTotalSumInCell(int banknoteValue) {
+        return actualAmountOfBanknotes * banknoteValue;
     }
 
     public int getActualAmountOfBanknotes() {
@@ -16,5 +12,9 @@ public abstract class AtmCells {
 
     public void setActualAmountOfBanknotes(int actualAmountOfBanknotes) {
         this.actualAmountOfBanknotes = actualAmountOfBanknotes;
+    }
+
+    public AtmCells() {
+        actualAmountOfBanknotes = 2500;
     }
 }

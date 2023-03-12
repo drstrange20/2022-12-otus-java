@@ -24,5 +24,31 @@ package ru.atm;
 дисплей, UI (консольный, Web, Swing), валюта, счет, карта, т.д.
 Все это не только не нужно, но и вредно!*/
 
+
+import ru.atm.api.serveces.AtmCells;
+import ru.atm.api.serveces.DepositeBox;
+import ru.atm.domain.AutomaticTellerMachine;
+import ru.atm.services.DepositBoxImpl;
+import ru.atm.services.cells.*;
+
 public class Main {
+    public static void main(String[] args) {
+        DepositeBox depositeBox = new DepositBoxImpl();
+        AtmCells cellForFiveThousandBanknotes = new CellForFiveThousandBanknotes();
+        AtmCells cellForTwoThousandBanknotes = new CellForTwoThousandBanknotes();
+        AtmCells cellForOneThousandBanknotes = new CellForOneThousandBanknotes();
+        AtmCells cellForFiveHundredBanknotes = new CellForFiveHundredBanknotes();
+        AtmCells cellForTwoHundredBanknotes = new CellForTwoHundredBanknotes();
+        AtmCells cellForOneHundredBanknotes = new CellForOneHundredBanknotes();
+        AtmCells cellForFiftyBanknotes = new CellForFiftyBanknotes();
+        AutomaticTellerMachine atm = new AutomaticTellerMachine(
+                cellForFiveThousandBanknotes,
+                cellForTwoThousandBanknotes,
+                cellForOneThousandBanknotes,
+                cellForFiveHundredBanknotes,
+                cellForTwoHundredBanknotes,
+                cellForOneHundredBanknotes,
+                cellForFiftyBanknotes,
+                depositeBox);
+    }
 }
