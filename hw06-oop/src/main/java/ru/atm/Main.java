@@ -27,6 +27,8 @@ package ru.atm;
 
 import ru.atm.api.serveces.AtmCells;
 import ru.atm.api.serveces.DepositeBox;
+import ru.atm.domain.AutomaticTellerMachine;
+import ru.atm.domain.GroupOfCells;
 import ru.atm.services.DepositBoxImpl;
 import ru.atm.services.cells.*;
 
@@ -40,6 +42,15 @@ public class Main {
         AtmCells cellForTwoHundredBanknotes = new CellForTwoHundredBanknotes(200);
         AtmCells cellForOneHundredBanknotes = new CellForOneHundredBanknotes(100);
         AtmCells cellForFiftyBanknotes = new CellForFiftyBanknotes(50);
-        System.out.println();
+        GroupOfCells groupOfCells = new GroupOfCells();
+        groupOfCells.addCell(cellForFiveThousandBanknotes);
+        groupOfCells.addCell(cellForTwoThousandBanknotes);
+        groupOfCells.addCell(cellForOneThousandBanknotes);
+        groupOfCells.addCell(cellForFiveHundredBanknotes);
+        groupOfCells.addCell(cellForTwoHundredBanknotes);
+        groupOfCells.addCell(cellForOneHundredBanknotes);
+        groupOfCells.addCell(cellForFiftyBanknotes);
+        AutomaticTellerMachine automaticTellerMachine = new AutomaticTellerMachine(groupOfCells);
+        System.out.println(automaticTellerMachine.getAtmBalance());
     }
 }

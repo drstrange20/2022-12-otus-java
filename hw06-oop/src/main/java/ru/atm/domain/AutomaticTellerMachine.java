@@ -1,15 +1,13 @@
 package ru.atm.domain;
 
 
-import ru.atm.api.serveces.AtmCells;
-
 public class AutomaticTellerMachine {
-    private final AtmCells atmCells;
+    private final GroupOfCells groupOfCells;
     private int atmBalance;
 
-    public AutomaticTellerMachine(AtmCells atmCells) {
-        this.atmCells = atmCells;
-        atmBalance = atmCells.getTotalSumInAllCells();
+    public AutomaticTellerMachine(GroupOfCells groupOfCells) {
+        this.groupOfCells = groupOfCells;
+        atmBalance = groupOfCells.getTotalSumInAllCells();
     }
 
     public int getAtmBalance() {
