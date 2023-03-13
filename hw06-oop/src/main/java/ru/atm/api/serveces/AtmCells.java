@@ -1,20 +1,39 @@
 package ru.atm.api.serveces;
 
-public abstract class AtmCells {
-    protected int actualAmountOfBanknotes;
-    private int getTotalSumInCell(int banknoteValue) {
-        return actualAmountOfBanknotes * banknoteValue;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AtmCells {
+    private final List<AtmCells> cellsList = new ArrayList<>();
+    private final int banknoteValue;
+    private int amountOfBanknotesInCell;
+    public void addCell(AtmCells atmCell) {
+        cellsList.add(atmCell);
     }
 
-    public int getActualAmountOfBanknotes() {
-        return actualAmountOfBanknotes;
+    public int getTotalSumInCell() {
+        return getAmountOfBanknotesInCell() * getBanknoteValue();
     }
 
-    public void setActualAmountOfBanknotes(int actualAmountOfBanknotes) {
-        this.actualAmountOfBanknotes = actualAmountOfBanknotes;
+    public int getAmountOfBanknotesInCell() {
+        return amountOfBanknotesInCell;
     }
 
-    public AtmCells() {
-        actualAmountOfBanknotes = 2500;
+    public void setAmountOfBanknotesInCell(int amountOfBanknotesInCell) {
+        this.amountOfBanknotesInCell = amountOfBanknotesInCell;
+    }
+
+    public int getBanknoteValue() {
+        return banknoteValue;
+    }
+
+    protected AtmCells(int banknoteValue) {
+        this.banknoteValue = banknoteValue;
+        amountOfBanknotesInCell = 1000;
+    }
+    public int getTotalSumInAllCells() {
+        return cellsList.stream()
+                .mapToInt(AtmCells::getTotalSumInCell)
+                .sum();
     }
 }

@@ -27,28 +27,19 @@ package ru.atm;
 
 import ru.atm.api.serveces.AtmCells;
 import ru.atm.api.serveces.DepositeBox;
-import ru.atm.domain.AutomaticTellerMachine;
 import ru.atm.services.DepositBoxImpl;
 import ru.atm.services.cells.*;
 
 public class Main {
     public static void main(String[] args) {
         DepositeBox depositeBox = new DepositBoxImpl();
-        AtmCells cellForFiveThousandBanknotes = new CellForFiveThousandBanknotes();
-        AtmCells cellForTwoThousandBanknotes = new CellForTwoThousandBanknotes();
-        AtmCells cellForOneThousandBanknotes = new CellForOneThousandBanknotes();
-        AtmCells cellForFiveHundredBanknotes = new CellForFiveHundredBanknotes();
-        AtmCells cellForTwoHundredBanknotes = new CellForTwoHundredBanknotes();
-        AtmCells cellForOneHundredBanknotes = new CellForOneHundredBanknotes();
-        AtmCells cellForFiftyBanknotes = new CellForFiftyBanknotes();
-        AutomaticTellerMachine atm = new AutomaticTellerMachine(
-                cellForFiveThousandBanknotes,
-                cellForTwoThousandBanknotes,
-                cellForOneThousandBanknotes,
-                cellForFiveHundredBanknotes,
-                cellForTwoHundredBanknotes,
-                cellForOneHundredBanknotes,
-                cellForFiftyBanknotes,
-                depositeBox);
+        AtmCells cellForFiveThousandBanknotes = new CellForFiveThousandBanknotes(5000);
+        AtmCells cellForTwoThousandBanknotes = new CellForTwoThousandBanknotes(2000);
+        AtmCells cellForOneThousandBanknotes = new CellForOneThousandBanknotes(1000);
+        AtmCells cellForFiveHundredBanknotes = new CellForFiveHundredBanknotes(500);
+        AtmCells cellForTwoHundredBanknotes = new CellForTwoHundredBanknotes(200);
+        AtmCells cellForOneHundredBanknotes = new CellForOneHundredBanknotes(100);
+        AtmCells cellForFiftyBanknotes = new CellForFiftyBanknotes(50);
+        System.out.println();
     }
 }
