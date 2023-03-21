@@ -25,32 +25,40 @@ package ru.atm;
 Все это не только не нужно, но и вредно!*/
 
 
-import ru.atm.api.serveces.AtmCells;
-import ru.atm.api.serveces.DepositeBox;
 import ru.atm.domain.AutomaticTellerMachine;
 import ru.atm.domain.GroupOfCells;
-import ru.atm.services.DepositBoxImpl;
+import ru.atm.services.ApplicationRunner;
+import ru.atm.domain.DepositBox;
+import ru.atm.services.CommandHandlerImpl;
+import ru.atm.services.ConsoleInputService;
+import ru.atm.services.ConsoleOutputService;
 import ru.atm.services.cells.*;
+import service.InputService;
 
 public class Main {
     public static void main(String[] args) {
-        DepositeBox depositeBox = new DepositBoxImpl();
-        AtmCells cellForFiveThousandBanknotes = new CellForFiveThousandBanknotes(5000);
-        AtmCells cellForTwoThousandBanknotes = new CellForTwoThousandBanknotes(2000);
-        AtmCells cellForOneThousandBanknotes = new CellForOneThousandBanknotes(1000);
-        AtmCells cellForFiveHundredBanknotes = new CellForFiveHundredBanknotes(500);
-        AtmCells cellForTwoHundredBanknotes = new CellForTwoHundredBanknotes(200);
-        AtmCells cellForOneHundredBanknotes = new CellForOneHundredBanknotes(100);
-        AtmCells cellForFiftyBanknotes = new CellForFiftyBanknotes(50);
-        GroupOfCells groupOfCells = new GroupOfCells();
+        var groupOfCells = new GroupOfCells();
+
+        var cellForFiveThousandBanknotes = new CellForFiveThousandBanknotes(5000);
+        var cellForOneThousandBanknotes = new CellForOneThousandBanknotes(1000);
+        var cellForFiveHundredBanknotes = new CellForFiveHundredBanknotes(500);
+        var cellForOneHundredBanknotes = new CellForOneHundredBanknotes(100);
+
+        var depositBox = new DepositBox();
+
         groupOfCells.addCell(cellForFiveThousandBanknotes);
-        groupOfCells.addCell(cellForTwoThousandBanknotes);
         groupOfCells.addCell(cellForOneThousandBanknotes);
         groupOfCells.addCell(cellForFiveHundredBanknotes);
-        groupOfCells.addCell(cellForTwoHundredBanknotes);
         groupOfCells.addCell(cellForOneHundredBanknotes);
-        groupOfCells.addCell(cellForFiftyBanknotes);
-        AutomaticTellerMachine automaticTellerMachine = new AutomaticTellerMachine(groupOfCells);
-        System.out.println(automaticTellerMachine.getAtmBalance());
+
+        var outputService = new ConsoleOutputService();
+        var inputService = new ConsoleInputService();
+
+        var handler = new CommandHandlerImpl();
+
+        var atm = new AutomaticTellerMachine(groupOfCells, depositBox, outputService);
+
+        var appRunner = new ApplicationRunner(outputService, handler, inputService);
+        appRunner.run(atm);
     }
 }
