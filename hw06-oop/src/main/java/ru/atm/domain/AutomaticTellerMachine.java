@@ -20,11 +20,12 @@ public class AutomaticTellerMachine {
         return atmBalance;
     }
 
-    public void setAtmBalance(int atmBalance) {
-        this.atmBalance = atmBalance;
+    public void setAtmBalance() {
+        this.atmBalance = groupOfCells.getTotalSumInAllCells();
     }
 
     public Wallet giveMeMoney(int sum) {
+        int result = sum;
         if (sum % 100 != 0) {
             outputService.printMessageAboutCorrectSum();
             return null;
@@ -43,15 +44,15 @@ public class AutomaticTellerMachine {
                 break;
             }
         }
-        return new Wallet(sum);
+        setAtmBalance();
+        return new Wallet(result);
     }
 
     public Wallet takeMyMoney(int sum, int amountOfBanknotes) {
         if ((amountOfBanknotes + depositBox.getAmountOfBanknotes()) > depositBox.maxAmountOfBanknotes) {
-
+            outputService.printAtmIsFullMessage();
             return null;
         }
-
         depositBox.setActualAmountOfBanknotes(amountOfBanknotes);
         return new Wallet(sum);
     }

@@ -10,9 +10,6 @@ public class GroupOfCells {
         cellsList.add(atmCell);
     }
 
-    public AtmCells getCell(int cellNumber) {
-        return cellsList.get(cellNumber);
-    }
 
     public int getTotalSumInAllCells() {
         return cellsList.stream()
@@ -24,7 +21,4 @@ public class GroupOfCells {
         return cellsList;
     }
 
-    public int getBanknoteValue(int index) {
-        return cellsList.get(index).getBanknoteValue();
-    }
 }

@@ -8,14 +8,14 @@ public class ApplicationRunner {
     private final ConsoleOutputService outputService;
     private final InputService inputService;
     private final CommandHandler commandHandler;
-    private boolean flag = false;
+    private boolean isRunning = true;
 
-    public boolean isFlag() {
-        return flag;
+    public boolean getIsRunning() {
+        return isRunning;
     }
 
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public void setRunningToFalse() {
+        isRunning = false;
     }
 
     public ApplicationRunner(ConsoleOutputService outputService,
@@ -27,12 +27,12 @@ public class ApplicationRunner {
     }
 
     public void run(AutomaticTellerMachine atm) {
-        while (flag) {
+        while (getIsRunning()) {
             outputService.printChoiceOperationMessage();
             String command = inputService.readString();
 
             if (commandHandler.handleExitCommand(command)) {
-                setFlag(true);
+                setRunningToFalse();
                 outputService.printGoodByeMessage();
             } else if (commandHandler.handleGiveMoneyCommand(command)) {
                 outputService.printMessageAboutCorrectSum();
@@ -44,7 +44,6 @@ public class ApplicationRunner {
                 int amountOfBanknotes = inputService.readInt();
                 var wallet = atm.takeMyMoney(sum, amountOfBanknotes);
             }
-
         }
     }
 }
