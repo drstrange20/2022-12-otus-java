@@ -1,22 +1,30 @@
 package ru.atm.domain;
 
+import ru.atm.api.serveces.GroupOfCells;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupOfCells {
-    private final List<AtmCells> cellsList = new ArrayList<>();
+public class GroupOfCellsImpl implements GroupOfCells {
+    private final List<AtmCells> cellsList;
 
+    public GroupOfCellsImpl() {
+        cellsList = new ArrayList<>();
+    }
+
+    @Override
     public void addCell(AtmCells atmCell) {
         cellsList.add(atmCell);
     }
 
-
-    public int getTotalSumInAllCells() {
+    @Override
+    public int getSumInAllCells() {
         return cellsList.stream()
                 .mapToInt(AtmCells::getTotalSumInCell)
                 .sum();
     }
 
+    @Override
     public List<AtmCells> getCellsList() {
         return cellsList;
     }

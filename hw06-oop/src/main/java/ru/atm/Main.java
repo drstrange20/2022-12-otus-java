@@ -1,8 +1,8 @@
 package ru.atm;
 
 
-import ru.atm.domain.AutomaticTellerMachine;
-import ru.atm.domain.GroupOfCells;
+import ru.atm.domain.AtmServiceImpl;
+import ru.atm.domain.GroupOfCellsImpl;
 import ru.atm.services.ApplicationRunner;
 import ru.atm.domain.DepositBox;
 import ru.atm.services.CommandHandlerImpl;
@@ -12,7 +12,7 @@ import ru.atm.services.cells.*;
 
 public class Main {
     public static void main(String[] args) {
-        var groupOfCells = new GroupOfCells();
+        var groupOfCells = new GroupOfCellsImpl();
 
         var cellForFiveThousandBanknotes = new CellForFiveThousandBanknotes(5000);
         var cellForOneThousandBanknotes = new CellForOneThousandBanknotes(1000);
@@ -31,7 +31,7 @@ public class Main {
 
         var handler = new CommandHandlerImpl();
 
-        var atm = new AutomaticTellerMachine(groupOfCells, depositBox, outputService);
+        var atm = new AtmServiceImpl(groupOfCells, depositBox);
 
         var appRunner = new ApplicationRunner(outputService, handler, inputService);
         appRunner.run(atm);

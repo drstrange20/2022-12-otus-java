@@ -18,7 +18,7 @@ public class AtmCells {
     }
 
     public void setAmountOfBanknotes(int amountOfBanknotes) {
-        this.amountOfBanknotesInCell = getAmountOfBanknotesInCell() - amountOfBanknotes;
+        amountOfBanknotesInCell = getAmountOfBanknotesInCell() - amountOfBanknotes;
     }
 
     public int getBanknoteValue() {

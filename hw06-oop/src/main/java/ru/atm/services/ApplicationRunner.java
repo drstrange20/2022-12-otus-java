@@ -1,7 +1,7 @@
 package ru.atm.services;
 
 import ru.atm.api.serveces.CommandHandler;
-import ru.atm.domain.AutomaticTellerMachine;
+import ru.atm.domain.AtmServiceImpl;
 import service.InputService;
 
 public class ApplicationRunner {
@@ -14,7 +14,7 @@ public class ApplicationRunner {
         return isRunning;
     }
 
-    public void setRunningToFalse() {
+    public void setVariableToFalse() {
         isRunning = false;
     }
 
@@ -26,23 +26,27 @@ public class ApplicationRunner {
         this.inputService = inputService;
     }
 
-    public void run(AutomaticTellerMachine atm) {
+    public void run(AtmServiceImpl atm) {
         while (getIsRunning()) {
             outputService.printChoiceOperationMessage();
             String command = inputService.readString();
 
-            if (commandHandler.handleExitCommand(command)) {
-                setRunningToFalse();
-                outputService.printGoodByeMessage();
-            } else if (commandHandler.handleGiveMoneyCommand(command)) {
-                outputService.printMessageAboutCorrectSum();
-                int sum = inputService.readInt();
-                var wallet = atm.giveMeMoney(sum);
-            } else {
-                outputService.printPutYourMoneyMessage();
-                int sum = inputService.readInt();
-                int amountOfBanknotes = inputService.readInt();
-                var wallet = atm.takeMyMoney(sum, amountOfBanknotes);
+            try {
+                if (commandHandler.handleExitCommand(command)) {
+                    setVariableToFalse();
+                    outputService.printGoodByeMessage();
+                } else if (commandHandler.handleWithdrawMoneyCommand(command)) {
+                    outputService.printMessageAboutCorrectSum();
+                    int sum = inputService.readInt();
+                    var wallet = atm.withdrawMoney(sum);
+                } else {
+                    outputService.printPutYourMoneyMessage();
+                    int sum = inputService.readInt();
+                    int amountOfBanknotes = inputService.readInt();
+                    var wallet = atm.depositMoney(sum, amountOfBanknotes);
+                }
+            } catch (IllegalArgumentException e) {
+                outputService.outputException(e.getMessage());
             }
         }
     }
