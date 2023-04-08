@@ -1,8 +1,8 @@
 package ru.atm.api.serveces;
 
-import ru.atm.domain.Wallet;
+import ru.atm.domain.Account;
 
 @FunctionalInterface
 public interface DepositService {
-    Wallet depositMoney(int sum, int amountOfBanknotes);
+    void depositMoney(int sum, int amountOfBanknotes, Account account);
 }

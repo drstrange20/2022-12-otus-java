@@ -2,19 +2,20 @@ package ru.atm.domain;
 
 import ru.atm.api.serveces.GroupOfCells;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GroupOfCellsImpl implements GroupOfCells {
     private final List<AtmCells> cellsList;
 
-    public GroupOfCellsImpl() {
-        cellsList = new ArrayList<>();
-    }
+    public GroupOfCellsImpl(AtmCells cellForFiveThousandBanknotes,
+                            AtmCells cellForOneThousandBanknotes,
+                            AtmCells cellForFiveHundredBanknotes,
+                            AtmCells cellForOneHundredBanknotes) {
 
-    @Override
-    public void addCell(AtmCells atmCell) {
-        cellsList.add(atmCell);
+        cellsList = List.of(cellForFiveThousandBanknotes,
+                cellForOneThousandBanknotes,
+                cellForFiveHundredBanknotes,
+                cellForOneHundredBanknotes);
     }
 
     @Override
@@ -29,4 +30,7 @@ public class GroupOfCellsImpl implements GroupOfCells {
         return cellsList;
     }
 
+    public void removeCellFromList(AtmCells cell) {
+        cellsList.remove(cell);
+    }
 }

@@ -12,19 +12,13 @@ import ru.atm.services.cells.*;
 
 public class Main {
     public static void main(String[] args) {
-        var groupOfCells = new GroupOfCellsImpl();
-
-        var cellForFiveThousandBanknotes = new CellForFiveThousandBanknotes(5000);
-        var cellForOneThousandBanknotes = new CellForOneThousandBanknotes(1000);
-        var cellForFiveHundredBanknotes = new CellForFiveHundredBanknotes(500);
-        var cellForOneHundredBanknotes = new CellForOneHundredBanknotes(100);
+        var groupOfCells = new GroupOfCellsImpl(
+                new CellForFiveThousandBanknotes(5000),
+                new CellForOneThousandBanknotes(1000),
+                new CellForFiveHundredBanknotes(500),
+                new CellForOneHundredBanknotes(100));
 
         var depositBox = new DepositBox();
-
-        groupOfCells.addCell(cellForFiveThousandBanknotes);
-        groupOfCells.addCell(cellForOneThousandBanknotes);
-        groupOfCells.addCell(cellForFiveHundredBanknotes);
-        groupOfCells.addCell(cellForOneHundredBanknotes);
 
         var outputService = new ConsoleOutputService();
         var inputService = new ConsoleInputService();

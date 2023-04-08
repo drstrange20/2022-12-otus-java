@@ -1,6 +1,7 @@
 package ru.atm.services;
 
 import ru.atm.api.serveces.CommandHandler;
+import ru.atm.domain.Account;
 import ru.atm.domain.AtmServiceImpl;
 import service.InputService;
 
@@ -43,7 +44,8 @@ public class ApplicationRunner {
                     outputService.printPutYourMoneyMessage();
                     int sum = inputService.readInt();
                     int amountOfBanknotes = inputService.readInt();
-                    var wallet = atm.depositMoney(sum, amountOfBanknotes);
+                    var account = new Account(50000);
+                    atm.depositMoney(sum, amountOfBanknotes, account);
                 }
             } catch (IllegalArgumentException e) {
                 outputService.outputException(e.getMessage());

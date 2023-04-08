@@ -11,6 +11,10 @@ public class DepositBox {
     }
 
     public void setActualAmountOfBanknotes(int actualAmountOfBanknotes) {
-        this.actualAmountOfBanknotes = getAmountOfBanknotes() + actualAmountOfBanknotes;
+        this.actualAmountOfBanknotes = actualAmountOfBanknotes;
+    }
+
+    public int getMaxAmountOfBanknotes() {
+        return maxAmountOfBanknotes;
     }
 }

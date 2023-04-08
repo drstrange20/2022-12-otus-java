@@ -8,11 +8,11 @@ public class CommandHandlerImpl implements CommandHandler {
 
     @Override
     public boolean handleExitCommand(String command) {
-        return command.equals(EXIT_COMMAND);
+        return command.equalsIgnoreCase(EXIT_COMMAND);
     }
 
     @Override
     public boolean handleWithdrawMoneyCommand(String command) {
-        return command.equals(GIVE_MONEY_COMMAND);
+        return command.equalsIgnoreCase(GIVE_MONEY_COMMAND);
     }
 }

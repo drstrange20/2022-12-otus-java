@@ -25,25 +25,32 @@ public class AtmServiceImpl implements WithdrawalService, DepositService {
     public Wallet withdrawMoney(int sum) {
         int result = sum;
 
-        if (new CorrectSumValidator().validate(sum)) {
+        if (new NotEnoughMoneyValidator().validate(getAtmBalance(), sum)) {
             throw new IllegalArgumentException();
         }
 
-        if (new NotEnoughMoneyValidator().validate(getAtmBalance(), sum)) {
+        if (new CorrectSumValidator().validate(sum)) {
             throw new IllegalArgumentException();
         }
 
         int amountOfBanknotes;
         for (AtmCells cell : groupOfCells.getCellsList()) {
-            amountOfBanknotes = sum % cell.getBanknoteValue();
+            amountOfBanknotes = sum / cell.getBanknoteValue();
             cell.setAmountOfBanknotes(amountOfBanknotes);
+
+            if (new AmountOfBanknotesValidator().validate(amountOfBanknotes, cell.getAmountOfBanknotesInCell())) {
+                amountOfBanknotes = cell.getAmountOfBanknotesInCell();
+                groupOfCells.removeCellFromList(cell);
+            }
+
             sum = sum - amountOfBanknotes * cell.getBanknoteValue();
 
             if (new SuccessfulOperationValidator().validate(sum)) {
+                updateAtmBalance();
                 return new Wallet(result);
             }
-        }
 
+        }
         if (new NotEnoughBanknotesValidator().validate(sum)) {
             throw new IllegalArgumentException();
         }
@@ -51,14 +58,14 @@ public class AtmServiceImpl implements WithdrawalService, DepositService {
         return new Wallet(result);
     }
 
-    public Wallet depositMoney(int sum, int amountOfBanknotes) {
+    public void depositMoney(int sum, int amountOfBanknotes, Account account) {
         int result = amountOfBanknotes + depositBox.getAmountOfBanknotes();
 
-        if (new FullAtmValidator().validate(result, depositBox.maxAmountOfBanknotes)) {
+        if (new FullAtmValidator().validate(result, depositBox.getMaxAmountOfBanknotes())) {
             throw new IllegalArgumentException();
         }
 
-        depositBox.setActualAmountOfBanknotes(amountOfBanknotes);
-        return new Wallet(0);
+        account.setAccountValue(sum);
+        depositBox.setActualAmountOfBanknotes(result);
     }
 }
