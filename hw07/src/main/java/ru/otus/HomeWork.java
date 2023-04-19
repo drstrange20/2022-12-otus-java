@@ -47,7 +47,6 @@ public class HomeWork {
 
         var result = complexProcessor.handle(message);
         dataList.clear();
-
         System.out.println("result:                    " + result); //Для того чтобы в консоли было нагляднее
         var msgFromHistory = historyListener.findMessageById(1L);
         System.out.println("messageFromHistory: " + msgFromHistory.toString());
