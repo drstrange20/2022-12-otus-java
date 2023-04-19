@@ -48,8 +48,8 @@ public class HomeWork {
         var result = complexProcessor.handle(message);
         dataList.clear();
 
-        System.out.println("result:             " + result); //result with clear data and changed field11 with field12
+        System.out.println("result:                    " + result); //Для того чтобы в консоли было нагляднее
         var msgFromHistory = historyListener.findMessageById(1L);
-        System.out.println("messageFromHistory: " + msgFromHistory.get());
+        System.out.println("messageFromHistory: " + msgFromHistory.toString());
     }
 }

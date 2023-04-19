@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.otus.model.Message;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Класс ChangingFieldsProcessor должен ")
 class ChangingFieldsProcessorTest {
@@ -18,7 +17,7 @@ class ChangingFieldsProcessorTest {
                 .field12("field12")
                 .build();
 
-            var newMsg = new ChangingFieldsProcessor().process(message);
+        var newMsg = new ChangingFieldsProcessor().process(message);
 
         Assertions.assertEquals("field11", newMsg.getField12());
         Assertions.assertEquals("field12", newMsg.getField11());

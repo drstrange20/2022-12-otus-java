@@ -221,6 +221,7 @@ public class Message {
             this.field11 = field11;
             return this;
         }
+
         public Builder field12(String field12) {
             this.field12 = field12;
             return this;
