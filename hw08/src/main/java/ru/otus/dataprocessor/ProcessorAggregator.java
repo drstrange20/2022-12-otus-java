@@ -10,12 +10,8 @@ public class ProcessorAggregator implements Processor {
     @Override
     public Map<String, Double> process(List<Measurement> data) {
         Map<String, Double> aggregatedMeasurements = new TreeMap<>();
-        for (var i = 0; i < data.size(); i++) {
-            if (aggregatedMeasurements.containsKey(data.get(i).getName())) {
-                aggregatedMeasurements.replace(data.get(i).getName(), aggregatedMeasurements.get(data.get(i).getName()) + data.get(i).getValue());
-            } else {
-                aggregatedMeasurements.put(data.get(i).getName(), data.get(i).getValue());
-            }
+        for (Measurement measurement : data) {
+            aggregatedMeasurements.compute(measurement.getName(), (key, value) -> (value == null) ? measurement.getValue() : value + measurement.getValue());
         }
         return aggregatedMeasurements;
     }

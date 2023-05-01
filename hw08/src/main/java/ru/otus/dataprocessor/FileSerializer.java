@@ -10,6 +10,7 @@ import java.util.Map;
 public class FileSerializer implements Serializer {
 
     private final String fileName;
+
     public FileSerializer(String fileName) {
         this.fileName = fileName;
     }
@@ -20,15 +21,10 @@ public class FileSerializer implements Serializer {
 
     @Override
     public void serialize(Map<String, Double> data) {
-        Gson gson = new Gson();
-        gson.toJson(data);
-
-        try(FileWriter fileWriter = new FileWriter(getFileName())) {
-            gson.toJson(data, fileWriter);
+        try (FileWriter fileWriter = new FileWriter(getFileName())) {
+            new Gson().toJson(data, fileWriter);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //формирует результирующий json и сохраняет его в файл
     }
 }
