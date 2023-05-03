@@ -1,12 +1,13 @@
 package ru.otus.dataprocessor;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import ru.otus.model.Measurement;
 
-import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
+import java.util.Objects;
 
 public class ResourcesFileLoader implements Loader {
     private final String fileName;
@@ -21,13 +22,11 @@ public class ResourcesFileLoader implements Loader {
 
     @Override
     public List<Measurement> load() {
-        List<Measurement> data = null;
-        try (JsonReader reader = new JsonReader(new FileReader(getFileName()))) {
-            data = new Gson().fromJson(reader, new TypeToken<List<Measurement>>() {
-            }.getType());
-        } catch (Exception e) {
-            e.printStackTrace();
+        try (Reader reader = new InputStreamReader(Objects.requireNonNull(ResourcesFileLoader.class.getClassLoader()
+                .getResourceAsStream(getFileName())))) {
+            return List.of(new Gson().fromJson(reader, Measurement[].class));
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
         }
-        return data;
     }
 }
