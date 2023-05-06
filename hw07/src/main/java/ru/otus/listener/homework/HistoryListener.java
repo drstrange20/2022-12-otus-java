@@ -1,5 +1,7 @@
 package ru.otus.listener.homework;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.otus.listener.Listener;
 import ru.otus.model.Message;
 import ru.otus.model.ObjectForMessage;
@@ -7,10 +9,13 @@ import ru.otus.model.ObjectForMessage;
 import java.util.*;
 
 public class HistoryListener implements Listener, HistoryReader {
+    private static final Logger logger = LoggerFactory.getLogger(HistoryListener.class);
     private final HashMap<Long, Optional<Message>> historyHashMap = new HashMap<>();
 
     @Override
     public void onUpdated(Message msg) {
+        logger.info("info level:{}", msg);
+
         ObjectForMessage newObjectForMessage = new ObjectForMessage();
         List<String> newDataList = new ArrayList<>(msg.getField13().getData());
         newObjectForMessage.setData(newDataList);

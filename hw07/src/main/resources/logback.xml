@@ -1,0 +1,14 @@
+<configuration scan="false">
+
+    <appender name="APP_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>log/app.log</file>
+        <encoder>
+            <pattern>%date %level [%thread] [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="ru.otus.listener.homework.HistoryListener" level="info" additivity="false">
+        <appender-ref ref="APP_LOG"/>
+    </logger>
+
+</configuration>
