@@ -21,9 +21,15 @@ dependencies {
 }
 
 test {
-    systemProperty "file.encoding", "utf-8"
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
+    }
+}
+
+
+tasks.withType(JavaCompile) {
+    options.with {
+        encoding = 'UTF-8'
     }
 }

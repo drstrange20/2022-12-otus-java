@@ -4,7 +4,6 @@ import my.homework.annotations.After;
 import my.homework.annotations.Before;
 import my.homework.annotations.Test;
 import my.homework.service.ConsoleOutputService;
-import service.OutputService;
 import service.ReportService;
 
 import java.lang.annotation.Annotation;
@@ -57,9 +56,9 @@ public class TestRunner {
         }
     }
 
-    private List<Method> getMethodsByAnnotation (Class<? extends Annotation> annotation, Method[] allMethods) {
+    private List<Method> getMethodsByAnnotation(Class<? extends Annotation> annotation, Method[] allMethods) {
         return Arrays.stream(allMethods)
-               .filter(method -> method.isAnnotationPresent(annotation))
-               .collect(Collectors.toList());
+                .filter(method -> method.isAnnotationPresent(annotation))
+                .collect(Collectors.toList());
     }
 }

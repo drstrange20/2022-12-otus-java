@@ -1,10 +1,17 @@
 <configuration scan="false">
 
     <appender name="APP_LOG" class="ch.qos.logback.core.FileAppender">
+
         <file>log/app.log</file>
+
         <encoder>
             <pattern>%date %level [%thread] [%file:%line] %msg%n</pattern>
         </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+
     </appender>
 
     <logger name="ru.otus.listener.homework.HistoryListener" level="info" additivity="false">
